@@ -23,8 +23,8 @@ data class CustomField(
         val type: FieldType? = null,
         @Column("enabled")
         val enabled: Boolean? = null,
-        @Column("names")
-        val names: Map<String, String>? = null,
+        @Column("labels")
+        val labels: Map<String, String>? = null,
         @Column("descriptions")
         val descriptions: Map<String, String>? = null,
         @Column("placeholders")

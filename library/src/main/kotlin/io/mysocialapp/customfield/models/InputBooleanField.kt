@@ -35,8 +35,8 @@ class InputBooleanField(builder: InputTextField.Builder) : InputTextField(builde
             return this
         }
 
-        override fun addName(lang: Language, text: String): Builder {
-            super.addName(lang, text)
+        override fun addLabel(lang: Language, text: String): Builder {
+            super.addLabel(lang, text)
             return this
         }
 
@@ -58,7 +58,7 @@ class InputBooleanField(builder: InputTextField.Builder) : InputTextField(builde
         cf.enabled?.let { mEnabled = it }
         cf.createdDate?.let { createdDate(it) }
         cf.updatedDate?.let { updatedDate(it) }
-        cf.names?.forEach { k, v -> addName(k.toLanguage(), v) }
+        cf.labels?.forEach { k, v -> addLabel(k.toLanguage(), v) }
         cf.descriptions?.forEach { k, v -> addDescription(k.toLanguage(), v) }
         cf.placeholders?.forEach { k, v -> addPlaceholder(k.toLanguage(), v) }
     })

@@ -24,8 +24,8 @@ class CustomFieldApplicationTests {
     @Test
     fun createInputText() {
         val inputText: InputTextField = InputTextField.Builder("test")
-                .addName(Language.FR, "prénom")
-                .addName(Language.EN, "first name")
+                .addLabel(Language.FR, "prénom")
+                .addLabel(Language.EN, "first name")
                 .addDescription(Language.FR, "Mettez votre prénom")
                 .addDescription(Language.EN, "Set your first name")
                 .addPlaceholder(Language.FR, "Romaric Philogène")
@@ -40,8 +40,8 @@ class CustomFieldApplicationTests {
     @Test
     fun saveInputText() {
         val inputText = InputTextField.Builder("test")
-                .addName(Language.FR, "prénom")
-                .addName(Language.EN, "first name")
+                .addLabel(Language.FR, "prénom")
+                .addLabel(Language.EN, "first name")
                 .addDescription(Language.FR, "Mettez votre prénom")
                 .addDescription(Language.EN, "Set your first name")
                 .addPlaceholder(Language.FR, "Romaric Philogène")
@@ -54,8 +54,8 @@ class CustomFieldApplicationTests {
     @Test
     fun createInputNumber() {
         val inputNumber: InputNumberField = InputNumberField.Builder("test")
-                .addName(Language.FR, "âge")
-                .addName(Language.EN, "age")
+                .addLabel(Language.FR, "âge")
+                .addLabel(Language.EN, "age")
                 .addDescription(Language.FR, "Quel est votre âge?")
                 .addDescription(Language.EN, "What's your age?")
                 .addPlaceholder(Language.FR, "18")

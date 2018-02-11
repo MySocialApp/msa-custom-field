@@ -30,8 +30,8 @@ class RealUsageTests {
         val usageKey = "profile"
 
         val firstNameInputText = InputTextField.Builder(usageKey)
-                .addName(Language.FR, "prénom")
-                .addName(Language.EN, "first name")
+                .addLabel(Language.FR, "prénom")
+                .addLabel(Language.EN, "first name")
                 .addDescription(Language.FR, "Mettez votre prénom")
                 .addDescription(Language.EN, "Set your first name")
                 .addPlaceholder(Language.FR, "Romaric")
@@ -39,8 +39,8 @@ class RealUsageTests {
                 .build()
 
         val lastNameInputText = InputTextField.Builder(usageKey)
-                .addName(Language.FR, "nom")
-                .addName(Language.EN, "last name")
+                .addLabel(Language.FR, "nom")
+                .addLabel(Language.EN, "last name")
                 .addDescription(Language.FR, "Mettez votre nom")
                 .addDescription(Language.EN, "Set your last name")
                 .addPlaceholder(Language.FR, "Philogène")

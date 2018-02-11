@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController
 @Component
 @RestController
 @RequestMapping("/test")
-class TestController {
+class TestController : MyController() {
 
     @Autowired
     val customFieldDataService: CustomFieldDataService? = null
 
     @GetMapping()
-    fun list() = customFieldDataService?.list("profile", "User", 9146945847035477570)
+    fun list() = customFieldDataService?.list(params.usageKey ?: "", params.parentType ?: "", params.parentId ?: -1L)
 
 }

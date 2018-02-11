@@ -14,7 +14,7 @@ open class InputTextField(private val builder: Builder) : Field {
     override var enabled: Boolean = builder.mEnabled
     override val createdDate = builder.mCreatedDate
     override var updatedDate = builder.mUpdatedDate
-    override var names = builder.mNames.toMap()
+    override var names = builder.mLabels.toMap()
     override var descriptions = builder.mDescriptions.toMap()
     override var placeholders = builder.mPlaceholders.toMap()
 
@@ -23,7 +23,7 @@ open class InputTextField(private val builder: Builder) : Field {
         var mEnabled: Boolean = true
         var mCreatedDate: Date = Date()
         var mUpdatedDate: Date = mCreatedDate
-        val mNames = mutableMapOf<Language, String>()
+        val mLabels = mutableMapOf<Language, String>()
         val mDescriptions = mutableMapOf<Language, String>()
         val mPlaceholders = mutableMapOf<Language, String>()
 
@@ -32,7 +32,7 @@ open class InputTextField(private val builder: Builder) : Field {
             map["enabled"]?.let { enabled(it.toString().toBoolean()) }
             map["created_date"]?.let { createdDate(it as Date) }
             map["updated_date"]?.let { updatedDate(it as Date) }
-            map["names"]?.let { (it as Map<String, String>).forEach { k, v -> addName(k.toLanguage(), v) } }
+            map["names"]?.let { (it as Map<String, String>).forEach { k, v -> addLabel(k.toLanguage(), v) } }
             map["descriptions"]?.let { (it as Map<String, String>).forEach { k, v -> addDescription(k.toLanguage(), v) } }
             map["placeholders"]?.let { (it as Map<String, String>).forEach { k, v -> addPlaceholder(k.toLanguage(), v) } }
 
@@ -59,8 +59,8 @@ open class InputTextField(private val builder: Builder) : Field {
             return this
         }
 
-        open fun addName(lang: Language, text: String): Builder {
-            mNames[lang] = text
+        open fun addLabel(lang: Language, text: String): Builder {
+            mLabels[lang] = text
             return this
         }
 
@@ -82,7 +82,7 @@ open class InputTextField(private val builder: Builder) : Field {
         cf.enabled?.let { mEnabled = it }
         cf.createdDate?.let { createdDate(it) }
         cf.updatedDate?.let { updatedDate(it) }
-        cf.names?.forEach { k, v -> addName(k.toLanguage(), v) }
+        cf.labels?.forEach { k, v -> addLabel(k.toLanguage(), v) }
         cf.descriptions?.forEach { k, v -> addDescription(k.toLanguage(), v) }
         cf.placeholders?.forEach { k, v -> addPlaceholder(k.toLanguage(), v) }
     })
@@ -107,7 +107,7 @@ open class InputTextField(private val builder: Builder) : Field {
                 builder.mUpdatedDate,
                 FieldType.INPUT_TEXT,
                 builder.mEnabled,
-                builder.mNames.toStringKeysValues(),
+                builder.mLabels.toStringKeysValues(),
                 builder.mDescriptions.toStringKeysValues(),
                 builder.mPlaceholders.toStringKeysValues(),
                 null,
