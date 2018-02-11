@@ -1,0 +1,6 @@
+spring:
+  data:
+    cassandra:
+      contact-points: cassandra
+      keyspace-name: custom_field_test
+      port: 9042
