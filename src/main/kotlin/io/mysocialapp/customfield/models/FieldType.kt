@@ -5,11 +5,12 @@ package io.mysocialapp.customfield.models
  */
 enum class FieldType {
     INPUT_TEXT,
+    INPUT_TEXTAREA,
     INPUT_NUMBER,
-    SELECT_BOX,
-    TEXTAREA,
+    INPUT_BOOLEAN,
+    INPUT_DATE,
+    INPUT_URL,
+    RADIO,
     CHECKBOX,
     LOCATION,
-    DATE,
-    BOOLEAN
 }

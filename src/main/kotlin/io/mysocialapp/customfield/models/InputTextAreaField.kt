@@ -6,7 +6,7 @@ import java.util.*
 /**
  * Created by evoxmusic on 11/02/2018.
  */
-class InputNumberField(builder: InputTextField.Builder) : InputTextField(builder) {
+class InputTextAreaField(builder: InputTextField.Builder) : InputTextField(builder) {
 
     class Builder(usageKey: String) : InputTextField.Builder(usageKey) {
 
@@ -50,7 +50,7 @@ class InputNumberField(builder: InputTextField.Builder) : InputTextField(builder
             return this
         }
 
-        override fun build() = InputNumberField(this).apply { checkValidity() }
+        override fun build() = InputTextAreaField(this).apply { checkValidity() }
     }
 
     constructor(cf: CustomField) : this(Builder(cf.usageKey!!).apply {
@@ -62,12 +62,4 @@ class InputNumberField(builder: InputTextField.Builder) : InputTextField(builder
         cf.descriptions?.forEach { k, v -> addDescription(k.toLanguage(), v) }
         cf.placeholders?.forEach { k, v -> addPlaceholder(k.toLanguage(), v) }
     })
-
-    override fun validator(fieldData: FieldData) {
-        try {
-            fieldData.value?.toString()?.toDouble()
-        } catch (e: NumberFormatException) {
-            throw FieldFormatException("field value must be numeric")
-        }
-    }
 }

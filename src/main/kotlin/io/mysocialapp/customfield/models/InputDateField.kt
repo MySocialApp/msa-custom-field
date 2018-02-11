@@ -1,12 +1,14 @@
 package io.mysocialapp.customfield.models
 
+import io.mysocialapp.customfield.extensions.toDate
 import io.mysocialapp.customfield.extensions.toLanguage
+import java.text.ParseException
 import java.util.*
 
 /**
  * Created by evoxmusic on 11/02/2018.
  */
-class InputNumberField(builder: InputTextField.Builder) : InputTextField(builder) {
+class InputDateField(builder: InputTextField.Builder) : InputTextField(builder) {
 
     class Builder(usageKey: String) : InputTextField.Builder(usageKey) {
 
@@ -50,7 +52,7 @@ class InputNumberField(builder: InputTextField.Builder) : InputTextField(builder
             return this
         }
 
-        override fun build() = InputNumberField(this).apply { checkValidity() }
+        override fun build() = InputDateField(this).apply { checkValidity() }
     }
 
     constructor(cf: CustomField) : this(Builder(cf.usageKey!!).apply {
@@ -65,9 +67,9 @@ class InputNumberField(builder: InputTextField.Builder) : InputTextField(builder
 
     override fun validator(fieldData: FieldData) {
         try {
-            fieldData.value?.toString()?.toDouble()
-        } catch (e: NumberFormatException) {
-            throw FieldFormatException("field value must be numeric")
+            fieldData.value?.toString()?.toDate()
+        } catch (e: ParseException) {
+            throw FieldFormatException("field value must be ISO8601 date format")
         }
     }
 }

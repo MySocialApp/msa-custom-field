@@ -11,12 +11,12 @@ import java.util.*
 open class InputTextField(private val builder: Builder) : Field {
 
     override val id: Long = builder.mId
-    override val enabled: Boolean = builder.mEnabled
+    override var enabled: Boolean = builder.mEnabled
     override val createdDate = builder.mCreatedDate
-    override val updatedDate = builder.mUpdatedDate
-    override val names = builder.mNames.toMap()
-    override val descriptions = builder.mDescriptions.toMap()
-    override val placeholders = builder.mPlaceholders.toMap()
+    override var updatedDate = builder.mUpdatedDate
+    override var names = builder.mNames.toMap()
+    override var descriptions = builder.mDescriptions.toMap()
+    override var placeholders = builder.mPlaceholders.toMap()
 
     open class Builder(val usageKey: String) {
         var mId: Long = UUID.generateLongId()
@@ -26,6 +26,18 @@ open class InputTextField(private val builder: Builder) : Field {
         val mNames = mutableMapOf<Language, String>()
         val mDescriptions = mutableMapOf<Language, String>()
         val mPlaceholders = mutableMapOf<Language, String>()
+
+        open fun fromMap(map: Map<String, Any?>): Builder {
+            map["id"]?.let { id(it.toString().toLong()) }
+            map["enabled"]?.let { enabled(it.toString().toBoolean()) }
+            map["created_date"]?.let { createdDate(it as Date) }
+            map["updated_date"]?.let { updatedDate(it as Date) }
+            map["names"]?.let { (it as Map<String, String>).forEach { k, v -> addName(k.toLanguage(), v) } }
+            map["descriptions"]?.let { (it as Map<String, String>).forEach { k, v -> addDescription(k.toLanguage(), v) } }
+            map["placeholders"]?.let { (it as Map<String, String>).forEach { k, v -> addPlaceholder(k.toLanguage(), v) } }
+
+            return this
+        }
 
         open fun id(id: Long): Builder {
             this.mId = id
@@ -81,8 +93,10 @@ open class InputTextField(private val builder: Builder) : Field {
         }
     }
 
-    override fun validator(customFieldData: CustomFieldData) {
-
+    override fun validator(fieldData: FieldData) {
+        if (fieldData.value !is String) {
+            throw FieldFormatException("field value must be string")
+        }
     }
 
     override val customField: CustomField

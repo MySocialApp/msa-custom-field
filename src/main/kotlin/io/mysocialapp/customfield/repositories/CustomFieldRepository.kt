@@ -12,4 +12,6 @@ interface CustomFieldRepository : CassandraRepository<CustomField> {
 
     fun findByUsageKey(usageKey: String): Iterable<CustomField>
 
+    fun findByUsageKeyAndId(usageKey: String, id: Long): CustomField?
+
 }

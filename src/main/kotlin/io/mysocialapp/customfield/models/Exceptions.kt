@@ -6,3 +6,5 @@ package io.mysocialapp.customfield.models
 class MissingMandatoryFieldException(message: String?) : RuntimeException(message)
 
 class FieldFormatException(message: String?) : RuntimeException(message)
+
+class DoesNotExistException(message: String?) : RuntimeException(message)

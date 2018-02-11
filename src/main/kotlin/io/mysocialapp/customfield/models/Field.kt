@@ -8,15 +8,19 @@ import java.util.*
 interface Field {
 
     val id: Long
-    val enabled: Boolean
+
+    val idStr: String
+        get() = id.toString()
+
+    var enabled: Boolean
     val createdDate: Date
-    val updatedDate: Date
-    val names: Map<Language, String>
-    val descriptions: Map<Language, String>
-    val placeholders: Map<Language, String>
+    var updatedDate: Date
+    var names: Map<Language, String>
+    var descriptions: Map<Language, String>
+    var placeholders: Map<Language, String>
 
     fun checkValidity()
-    fun validator(customFieldData: CustomFieldData)
+    fun validator(fieldData: FieldData)
 
     val customField: CustomField
 

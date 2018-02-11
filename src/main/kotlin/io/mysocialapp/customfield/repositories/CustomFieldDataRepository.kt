@@ -8,4 +8,10 @@ import org.springframework.stereotype.Repository
  * Created by evoxmusic on 11/02/2018.
  */
 @Repository
-interface CustomFieldDataRepository : CassandraRepository<CustomFieldData>
+interface CustomFieldDataRepository : CassandraRepository<CustomFieldData> {
+
+    fun findByUsageKeyAndParentTypeAndParentId(usageKey: String, parentType: String, parentId: Long): List<CustomFieldData>
+
+    fun findByUsageKeyAndParentTypeAndParentIdAndCustomFieldId(usageKey: String, parentType: String, parentId: Long, customFieldId: Long): CustomFieldData?
+
+}

@@ -22,6 +22,7 @@ parent_id bigint,
 custom_field_id bigint,
 created_date timestamp,
 updated_date timestamp,
+values list<text>,
 value text,
 PRIMARY KEY ((usage_key), parent_type, parent_id, custom_field_id)
 );

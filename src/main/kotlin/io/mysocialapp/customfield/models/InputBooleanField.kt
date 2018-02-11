@@ -6,7 +6,7 @@ import java.util.*
 /**
  * Created by evoxmusic on 11/02/2018.
  */
-class InputNumberField(builder: InputTextField.Builder) : InputTextField(builder) {
+class InputBooleanField(builder: InputTextField.Builder) : InputTextField(builder) {
 
     class Builder(usageKey: String) : InputTextField.Builder(usageKey) {
 
@@ -50,7 +50,7 @@ class InputNumberField(builder: InputTextField.Builder) : InputTextField(builder
             return this
         }
 
-        override fun build() = InputNumberField(this).apply { checkValidity() }
+        override fun build() = InputBooleanField(this).apply { checkValidity() }
     }
 
     constructor(cf: CustomField) : this(Builder(cf.usageKey!!).apply {
@@ -64,10 +64,8 @@ class InputNumberField(builder: InputTextField.Builder) : InputTextField(builder
     })
 
     override fun validator(fieldData: FieldData) {
-        try {
-            fieldData.value?.toString()?.toDouble()
-        } catch (e: NumberFormatException) {
-            throw FieldFormatException("field value must be numeric")
+        if (fieldData.value?.toString()?.toLowerCase() != "true" && fieldData.value?.toString()?.toLowerCase() != "false") {
+            throw FieldFormatException("field value must be boolean")
         }
     }
 }
