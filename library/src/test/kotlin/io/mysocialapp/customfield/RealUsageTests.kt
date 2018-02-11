@@ -27,8 +27,6 @@ class RealUsageTests {
 
     @Test
     fun createRandomCustomField() {
-        // simulate random field created by user
-
         val usageKey = "profile"
 
         val firstNameInputText = InputTextField.Builder(usageKey)

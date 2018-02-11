@@ -33,6 +33,8 @@ overridedb.*
 .DS_Store
 .factorypath
 data
+library/out
+app/out
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion
 
