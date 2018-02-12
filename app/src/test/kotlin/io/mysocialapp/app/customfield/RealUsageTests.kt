@@ -1,4 +1,4 @@
-package io.mysocialapp.customfield
+package io.mysocialapp.app.customfield
 
 import io.mysocialapp.customfield.models.FieldData
 import io.mysocialapp.customfield.models.InputTextField
