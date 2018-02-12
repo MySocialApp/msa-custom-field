@@ -9,6 +9,9 @@ import java.util.*
  */
 class InputURLField(builder: InputTextField.Builder) : InputTextField(builder) {
 
+    override val fieldType: FieldType
+        get() = FieldType.INPUT_URL
+
     class Builder(usageKey: String) : InputTextField.Builder(usageKey) {
 
         override fun fromMap(map: Map<String, Any?>): Builder {

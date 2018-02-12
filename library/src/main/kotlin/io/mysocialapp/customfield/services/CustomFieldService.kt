@@ -1,9 +1,6 @@
 package io.mysocialapp.customfield.services
 
-import io.mysocialapp.customfield.models.CustomField
-import io.mysocialapp.customfield.models.DoesNotExistException
-import io.mysocialapp.customfield.models.Field
-import io.mysocialapp.customfield.models.FieldFactory
+import io.mysocialapp.customfield.models.*
 import io.mysocialapp.customfield.repositories.CustomFieldRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cassandra.core.cql.CqlIdentifier
@@ -46,7 +43,11 @@ class CustomFieldService @Autowired constructor(private val cassandraAdminTempla
     fun create(vararg field: Field): List<Field> = field.map(::create)
 
     fun create(field: Field): Field {
-        customFieldRepository.save(field.customField)
+        return field.customField.usageKey?.let { create(it, field) } ?: throw MissingMandatoryFieldException("'usage_key' is mandatory")
+    }
+
+    fun create(usageKey: String, field: Field): Field {
+        customFieldRepository.save(field.customField.copy(usageKey = usageKey))
         return field
     }
 

@@ -24,5 +24,6 @@ interface Field {
     fun validator(fieldData: FieldData)
 
     val customField: CustomField
+    val fieldType: FieldType
 
 }

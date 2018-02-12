@@ -8,6 +8,9 @@ import java.util.*
  */
 class InputBooleanField(builder: InputTextField.Builder) : InputTextField(builder) {
 
+    override val fieldType: FieldType
+        get() = FieldType.INPUT_BOOLEAN
+
     class Builder(usageKey: String) : InputTextField.Builder(usageKey) {
 
         override fun fromMap(map: Map<String, Any?>): Builder {

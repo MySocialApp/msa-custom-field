@@ -10,6 +10,9 @@ import java.util.*
  */
 open class InputTextField(private val builder: Builder) : Field {
 
+    override val fieldType: FieldType
+        get() = FieldType.INPUT_TEXT
+
     override val id: Long = builder.mId
     override var enabled: Boolean = builder.mEnabled
     override var accessControl: AccessControl = builder.mAccessControl
@@ -114,7 +117,7 @@ open class InputTextField(private val builder: Builder) : Field {
                 builder.mId,
                 builder.mCreatedDate,
                 builder.mUpdatedDate,
-                FieldType.INPUT_TEXT,
+                fieldType,
                 builder.mEnabled,
                 builder.mAccessControl,
                 builder.mLabels.toStringKeysValues(),

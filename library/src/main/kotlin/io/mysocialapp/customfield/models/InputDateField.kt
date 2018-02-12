@@ -10,6 +10,9 @@ import java.util.*
  */
 class InputDateField(builder: InputTextField.Builder) : InputTextField(builder) {
 
+    override val fieldType: FieldType
+        get() = FieldType.INPUT_DATE
+
     class Builder(usageKey: String) : InputTextField.Builder(usageKey) {
 
         override fun fromMap(map: Map<String, Any?>): Builder {
