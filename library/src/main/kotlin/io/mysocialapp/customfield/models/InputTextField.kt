@@ -12,6 +12,7 @@ open class InputTextField(private val builder: Builder) : Field {
 
     override val id: Long = builder.mId
     override var enabled: Boolean = builder.mEnabled
+    override var accessControl: AccessControl = builder.mAccessControl
     override val createdDate = builder.mCreatedDate
     override var updatedDate = builder.mUpdatedDate
     override var names = builder.mLabels.toMap()

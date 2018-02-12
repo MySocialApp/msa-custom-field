@@ -13,6 +13,7 @@ interface Field {
         get() = id.toString()
 
     var enabled: Boolean
+    var accessControl: AccessControl
     val createdDate: Date
     var updatedDate: Date
     var names: Map<Language, String>
