@@ -4,6 +4,8 @@ This is our custom field library used at [MySocialApp](https://mysocialapp.io) (
 
 # Usage
 
+[![Release](https://jitpack.io/v/MySocialApp/msa-custom-field.svg)](https://jitpack.io/MySocialApp/msa-custom-field)
+
 Step 1. Add it in your root build.gradle at the end of repositories:
 ```
 repositories {
@@ -15,7 +17,7 @@ repositories {
 Step 2. Add the dependency
 ```
 dependencies {
-  compile 'com.github.mysocialapp:msa-custom-field:v0.1.1'
+  compile 'com.github.mysocialapp:msa-custom-field:{version}'
 }
 ```
 
