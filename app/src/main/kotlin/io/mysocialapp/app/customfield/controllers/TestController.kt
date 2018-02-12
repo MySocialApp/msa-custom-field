@@ -18,7 +18,7 @@ class TestController : MyController() {
     @Autowired
     val customFieldDataService: CustomFieldDataService? = null
 
-    @GetMapping()
+    @GetMapping
     fun list() = customFieldDataService?.list(params.usageKey ?: "", params.parentType ?: "", params.parentId ?: -1L)
 
 }

@@ -17,7 +17,7 @@ open class MyController {
         get() = QueryParameters().apply {
             req?.getParameter("usage_key")?.let { usageKey = it }
             req?.getParameter("parent_type")?.let { parentType = it }
-            req?.getParameter("parent_id")?.let { parentId = it }
+            req?.getParameter("parent_id")?.let { parentId = it.toLong() }
         }
 
 }
