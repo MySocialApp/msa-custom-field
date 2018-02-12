@@ -13,7 +13,7 @@ import org.springframework.data.cassandra.core.CassandraAdminTemplate
  * Created by evoxmusic on 10/02/2018.
  */
 @Configuration
-class MyCassandraConfiguration : AbstractCassandraConfiguration() {
+class AppCustomFieldCassandraConfiguration : AbstractCassandraConfiguration() {
 
     @Autowired
     private val env: Environment? = null
