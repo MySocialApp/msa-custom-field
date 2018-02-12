@@ -21,6 +21,7 @@ open class InputTextField(private val builder: Builder) : Field {
     open class Builder(val usageKey: String) {
         var mId: Long = UUID.generateLongId()
         var mEnabled: Boolean = true
+        var mAccessControl: AccessControl = AccessControl.PRIVATE
         var mCreatedDate: Date = Date()
         var mUpdatedDate: Date = mCreatedDate
         val mLabels = mutableMapOf<Language, String>()
@@ -30,6 +31,7 @@ open class InputTextField(private val builder: Builder) : Field {
         open fun fromMap(map: Map<String, Any?>): Builder {
             map["id"]?.let { id(it.toString().toLong()) }
             map["enabled"]?.let { enabled(it.toString().toBoolean()) }
+            map["access_control"]?.let { AccessControl.valueOf(it.toString().toUpperCase()) }
             map["created_date"]?.let { createdDate(it as Date) }
             map["updated_date"]?.let { updatedDate(it as Date) }
             map["names"]?.let { (it as Map<String, String>).forEach { k, v -> addLabel(k.toLanguage(), v) } }
@@ -46,6 +48,11 @@ open class InputTextField(private val builder: Builder) : Field {
 
         open fun enabled(enabled: Boolean): Builder {
             this.mEnabled = enabled
+            return this
+        }
+
+        open fun accessControl(accessControl: AccessControl): Builder {
+            this.mAccessControl = accessControl
             return this
         }
 
@@ -80,6 +87,7 @@ open class InputTextField(private val builder: Builder) : Field {
     constructor(cf: CustomField) : this(Builder(cf.usageKey!!).apply {
         id(cf.id!!)
         cf.enabled?.let { mEnabled = it }
+        cf.accessControl?.let { mAccessControl = it }
         cf.createdDate?.let { createdDate(it) }
         cf.updatedDate?.let { updatedDate(it) }
         cf.labels?.forEach { k, v -> addLabel(k.toLanguage(), v) }
@@ -107,6 +115,7 @@ open class InputTextField(private val builder: Builder) : Field {
                 builder.mUpdatedDate,
                 FieldType.INPUT_TEXT,
                 builder.mEnabled,
+                builder.mAccessControl,
                 builder.mLabels.toStringKeysValues(),
                 builder.mDescriptions.toStringKeysValues(),
                 builder.mPlaceholders.toStringKeysValues(),

@@ -27,6 +27,11 @@ class InputDateField(builder: InputTextField.Builder) : InputTextField(builder) 
             return this
         }
 
+        override fun accessControl(accessControl: AccessControl): Builder {
+            super.accessControl(accessControl)
+            return this
+        }
+
         override fun createdDate(date: Date): Builder {
             super.createdDate(date)
             return this
@@ -57,7 +62,8 @@ class InputDateField(builder: InputTextField.Builder) : InputTextField(builder) 
 
     constructor(cf: CustomField) : this(Builder(cf.usageKey!!).apply {
         id(cf.id!!)
-        cf.enabled?.let { mEnabled = it }
+        cf.enabled?.let { enabled(it) }
+        cf.accessControl?.let { accessControl(it) }
         cf.createdDate?.let { createdDate(it) }
         cf.updatedDate?.let { updatedDate(it) }
         cf.labels?.forEach { k, v -> addLabel(k.toLanguage(), v) }
