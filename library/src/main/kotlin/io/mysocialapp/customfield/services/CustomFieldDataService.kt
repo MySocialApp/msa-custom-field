@@ -22,20 +22,22 @@ class CustomFieldDataService @Autowired constructor(private val cassandraAdminTe
         cassandraAdminTemplate.createTable(true, CqlIdentifier("custom_field_data"), CustomFieldData::class.java, emptyMap())
     }
 
-    fun list(usageKey: String, parentType: String, parentId: Long): List<ResponseFieldData> {
-        val cfs = customFieldDataRepository.findByUsageKeyAndParentTypeAndParentId(usageKey, parentType, parentId)
-        return cfs.map { cf ->
-            ResponseFieldData(customFieldService.get(usageKey, cf.customFieldId!!),
-                    FieldData(cf.customFieldId, cf.createdDate, cf.updatedDate, cf.value ?: cf.values))
+    fun list(usageKey: String, parentType: String? = null, parentId: Long? = null): List<CustomFieldData> {
+        return if (parentType != null && parentId != null) {
+            customFieldDataRepository.findByUsageKeyAndParentTypeAndParentId(usageKey, parentType, parentId)
+        } else if (parentType != null)
+            customFieldDataRepository.findByUsageKeyAndParentType(usageKey, parentType)
+        else {
+            customFieldDataRepository.findByUsageKey(usageKey)
         }
     }
 
-    fun get(usageKey: String, parentType: String, parentId: Long, fieldId: Long): ResponseFieldData? {
-        val cf = customFieldDataRepository.findByUsageKeyAndParentTypeAndParentIdAndCustomFieldId(usageKey,
-                parentType, parentId, fieldId) ?: return null
+    fun get(usageKey: String?, parentType: String?, parentId: Long?, fieldId: Long?): CustomFieldData? {
+        if (usageKey == null || parentType == null || parentId == null || fieldId == null) {
+            return null
+        }
 
-        return ResponseFieldData(customFieldService.get(usageKey, cf.customFieldId!!),
-                FieldData(cf.customFieldId, cf.createdDate, cf.updatedDate, cf.value ?: cf.values))
+        return customFieldDataRepository.findByUsageKeyAndParentTypeAndParentIdAndCustomFieldId(usageKey, parentType, parentId, fieldId)
     }
 
     fun create(usageKey: String, parentType: String, parentId: Long, vararg fieldData: FieldData): List<ResponseFieldData> = fieldData.map {
@@ -57,10 +59,13 @@ class CustomFieldDataService @Autowired constructor(private val cassandraAdminTe
         val mFieldData = get(usageKey, parentType, parentId, fieldData.fieldId)
 
         customFieldDataRepository.save(CustomFieldData(usageKey, parentType, parentId, fieldData.fieldId,
-                mFieldData?.data?.createdDate ?: now, now, fieldData.values?.let { listOf(it.toString()) }, fieldData.value?.toString()))
+                mFieldData?.createdDate ?: now, now, fieldData.values?.let { listOf(it.toString()) }, fieldData.value?.toString()))
 
         return ResponseFieldData(field, fieldData.copy(createdDate = now, updatedDate = now))
     }
 
+    fun update(usageKey: String, parentType: String, parentId: Long, fieldData: FieldData): ResponseFieldData {
+        return create(usageKey, parentType, parentId, fieldData)
+    }
 
 }

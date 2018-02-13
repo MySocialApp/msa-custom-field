@@ -10,6 +10,10 @@ import org.springframework.stereotype.Repository
 @Repository
 interface CustomFieldDataRepository : CassandraRepository<CustomFieldData> {
 
+    fun findByUsageKey(usageKey: String): List<CustomFieldData>
+
+    fun findByUsageKeyAndParentType(usageKey: String, parentType: String): List<CustomFieldData>
+
     fun findByUsageKeyAndParentTypeAndParentId(usageKey: String, parentType: String, parentId: Long): List<CustomFieldData>
 
     fun findByUsageKeyAndParentTypeAndParentIdAndCustomFieldId(usageKey: String, parentType: String, parentId: Long, customFieldId: Long): CustomFieldData?
