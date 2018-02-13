@@ -57,9 +57,9 @@ class CustomFieldService @Autowired constructor(private val cassandraAdminTempla
         mField.apply {
             updatedDate = Date()
             mField.enabled = field.enabled
-            field.names.takeIf { it.isNotEmpty() }?.let { mField.names = it }
-            field.descriptions.takeIf { it.isNotEmpty() }?.let { mField.descriptions = it }
-            field.placeholders.takeIf { it.isNotEmpty() }?.let { mField.placeholders = it }
+            field.names?.takeIf { it.isNotEmpty() }?.let { mField.names = it }
+            field.descriptions?.takeIf { it.isNotEmpty() }?.let { mField.descriptions = it }
+            field.placeholders?.takeIf { it.isNotEmpty() }?.let { mField.placeholders = it }
         }
 
         customFieldRepository.save(mField.customField)
