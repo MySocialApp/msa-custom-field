@@ -8,19 +8,19 @@ import java.util.*
 /**
  * Created by evoxmusic on 11/02/2018.
  */
-open class InputTextField(private val builder: Builder) : Field {
+open class InputTextField(private val builder: Builder? = null) : Field {
 
     override val fieldType: FieldType
         get() = FieldType.INPUT_TEXT
 
-    override val id: Long = builder.mId
-    override var enabled: Boolean = builder.mEnabled
-    override var accessControl: AccessControl = builder.mAccessControl
-    override val createdDate = builder.mCreatedDate
-    override var updatedDate = builder.mUpdatedDate
-    override var names = builder.mLabels.toMap()
-    override var descriptions = builder.mDescriptions.toMap()
-    override var placeholders = builder.mPlaceholders.toMap()
+    override var id = builder?.mId
+    override var enabled = builder?.mEnabled
+    override var accessControl = builder?.mAccessControl
+    override var createdDate = builder?.mCreatedDate
+    override var updatedDate = builder?.mUpdatedDate
+    override var names = builder?.mLabels?.toMap()
+    override var descriptions = builder?.mDescriptions?.toMap()
+    override var placeholders = builder?.mPlaceholders?.toMap()
 
     open class Builder(val usageKey: String) {
         var mId: Long = UUID.generateLongId()
@@ -100,7 +100,7 @@ open class InputTextField(private val builder: Builder) : Field {
     })
 
     override fun checkValidity() {
-        if (names.isEmpty()) {
+        if (names == null || names?.isEmpty() == true) {
             throw MissingMandatoryFieldException("you must add at least one 'name' field")
         }
     }
@@ -113,16 +113,16 @@ open class InputTextField(private val builder: Builder) : Field {
 
     override val customField: CustomField
         get() = CustomField(
-                builder.usageKey,
-                builder.mId,
-                builder.mCreatedDate,
-                builder.mUpdatedDate,
+                builder?.usageKey,
+                builder?.mId,
+                builder?.mCreatedDate,
+                builder?.mUpdatedDate,
                 fieldType,
-                builder.mEnabled,
-                builder.mAccessControl,
-                builder.mLabels.toStringKeysValues(),
-                builder.mDescriptions.toStringKeysValues(),
-                builder.mPlaceholders.toStringKeysValues(),
+                builder?.mEnabled,
+                builder?.mAccessControl,
+                builder?.mLabels?.toStringKeysValues(),
+                builder?.mDescriptions?.toStringKeysValues(),
+                builder?.mPlaceholders?.toStringKeysValues(),
                 null,
                 null,
                 null,

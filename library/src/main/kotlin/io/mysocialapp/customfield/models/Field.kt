@@ -1,24 +1,35 @@
 package io.mysocialapp.customfield.models
 
+import com.fasterxml.jackson.annotation.JsonSubTypes
+import com.fasterxml.jackson.annotation.JsonTypeInfo
 import java.util.*
 
 /**
  * Created by evoxmusic on 11/02/2018.
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "field_type")
+@JsonSubTypes(
+        JsonSubTypes.Type(value = InputTextField::class, name = "INPUT_TEXT"),
+        JsonSubTypes.Type(value = InputTextAreaField::class, name = "INPUT_TEXTAREA"),
+        JsonSubTypes.Type(value = InputNumberField::class, name = "INPUT_NUMBER"),
+        JsonSubTypes.Type(value = InputBooleanField::class, name = "INPUT_BOOLEAN"),
+        JsonSubTypes.Type(value = InputDateField::class, name = "INPUT_DATE"),
+        JsonSubTypes.Type(value = InputURLField::class, name = "INPUT_URL")
+)
 interface Field {
 
-    val id: Long
+    var id: Long?
 
-    val idStr: String
+    val idStr: String?
         get() = id.toString()
 
-    var enabled: Boolean
-    var accessControl: AccessControl
-    val createdDate: Date
-    var updatedDate: Date
-    var names: Map<Language, String>
-    var descriptions: Map<Language, String>
-    var placeholders: Map<Language, String>
+    var enabled: Boolean?
+    var accessControl: AccessControl?
+    var createdDate: Date?
+    var updatedDate: Date?
+    var names: Map<Language, String>?
+    var descriptions: Map<Language, String>?
+    var placeholders: Map<Language, String>?
 
     fun checkValidity()
     fun validator(fieldData: FieldData)
