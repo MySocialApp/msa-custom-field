@@ -23,6 +23,8 @@ data class CustomField(
         val type: FieldType? = null,
         @Column("enabled")
         val enabled: Boolean? = null,
+        @Column("important")
+        val important: Boolean? = null,
         @Column("access_control")
         val accessControl: AccessControl? = null,
         @Column("labels")
@@ -31,11 +33,11 @@ data class CustomField(
         val descriptions: Map<String, String>? = null,
         @Column("placeholders")
         val placeholders: Map<String, String>? = null,
-        @Column("values")
-        val values: List<String>? = null,
         @Column("values_en")
         val valuesEnglish: List<String>? = null,
         @Column("values_fr")
         val valuesFrench: List<String>? = null,
         @Column("default_value")
-        val defaultValue: Int? = null)
+        val defaultValue: Int? = null,
+        @Column("position")
+        val position: Int? = null)

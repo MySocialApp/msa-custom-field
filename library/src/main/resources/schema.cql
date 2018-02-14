@@ -5,14 +5,15 @@ created_date timestamp,
 updated_date timestamp,
 type text,
 enabled boolean,
+important boolean,
 access_control text,
 labels map<text,text>,
 placeholders map<text,text>,
 descriptions map<text,text>,
-values list<text>,
 values_en list<text>,
 values_fr list<text>,
 default_value int,
+position int,
 PRIMARY KEY ((usage_key), id)
 );
 

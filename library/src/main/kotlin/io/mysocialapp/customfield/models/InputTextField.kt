@@ -11,12 +11,16 @@ import java.util.*
 open class InputTextField(@JsonIgnore override var usageKey: String? = null,
                           @JsonProperty(access = JsonProperty.Access.READ_ONLY) override var id: Long? = null,
                           override var enabled: Boolean? = null,
+                          override var important: Boolean? = null,
                           override var accessControl: AccessControl? = null,
                           @JsonProperty(access = JsonProperty.Access.READ_ONLY) override var createdDate: Date? = null,
                           @JsonProperty(access = JsonProperty.Access.READ_ONLY) override var updatedDate: Date? = null,
                           override var labels: Map<Language, String>? = null,
                           override var descriptions: Map<Language, String>? = null,
-                          override var placeholders: Map<Language, String>? = null) : Field {
+                          override var placeholders: Map<Language, String>? = null,
+                          override var values: Map<Language, List<String>>? = null,
+                          override var defaultValue: Int? = null,
+                          override var position: Int? = null) : Field {
 
     override val fieldType: FieldType
         get() = FieldType.INPUT_TEXT
@@ -43,14 +47,15 @@ open class InputTextField(@JsonIgnore override var usageKey: String? = null,
                 updatedDate,
                 fieldType,
                 enabled,
+                important,
                 accessControl,
                 labels?.toStringKeysValues(),
                 descriptions?.toStringKeysValues(),
                 placeholders?.toStringKeysValues(),
-                null,
-                null,
-                null,
-                null
+                values?.get(Language.EN),
+                values?.get(Language.FR),
+                defaultValue,
+                position
         )
 
 }

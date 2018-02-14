@@ -27,14 +27,14 @@ class CustomFieldService @Autowired constructor(private val cassandraAdminTempla
         cassandraAdminTemplate.createTable(true, CqlIdentifier(TABLE), CustomField::class.java, emptyMap())
     }
 
-    fun list(): Iterable<Field> = customFieldRepository.findAll().mapNotNull { FieldFactory.from(it) }
+    fun list(): Iterable<Field> = customFieldRepository.findAll().mapNotNull { FieldFactory.from(it) }.sortedBy { it.position }
 
     fun list(usageKey: String): Iterable<Field> {
         if (usageKey.isBlank()) {
             return emptyList()
         }
 
-        return customFieldRepository.findByUsageKey(usageKey).mapNotNull { FieldFactory.from(it) }
+        return customFieldRepository.findByUsageKey(usageKey).mapNotNull { FieldFactory.from(it) }.sortedBy { it.position }
     }
 
     fun get(usageKey: String, id: Long): Field? {
@@ -65,7 +65,7 @@ class CustomFieldService @Autowired constructor(private val cassandraAdminTempla
 
         mField.apply {
             updatedDate = Date()
-            mField.enabled = field.enabled
+            field.enabled?.let { enabled = it }
             field.labels?.takeIf { it.isNotEmpty() }?.let { mField.labels = it }
             field.descriptions?.takeIf { it.isNotEmpty() }?.let { mField.descriptions = it }
             field.placeholders?.takeIf { it.isNotEmpty() }?.let { mField.placeholders = it }
@@ -73,7 +73,7 @@ class CustomFieldService @Autowired constructor(private val cassandraAdminTempla
 
         customFieldRepository.save(mField.customField)
 
-        return field
+        return mField
     }
 
     fun delete(usageKey: String, id: Long) {

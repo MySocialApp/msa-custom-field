@@ -25,12 +25,16 @@ interface Field {
         get() = id.toString()
 
     var enabled: Boolean?
+    var important: Boolean?
     var accessControl: AccessControl?
     var createdDate: Date?
     var updatedDate: Date?
     var labels: Map<Language, String>?
     var descriptions: Map<Language, String>?
     var placeholders: Map<Language, String>?
+    var values: Map<Language, List<String>>?
+    var defaultValue: Int?
+    var position: Int?
 
     fun checkValidity()
     fun validator(fieldData: FieldData)
