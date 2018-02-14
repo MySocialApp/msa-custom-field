@@ -58,8 +58,11 @@ class CustomFieldDataService @Autowired constructor(private val cassandraAdminTe
         val now = Date()
         val mFieldData = get(usageKey, parentType, parentId, fieldData.fieldId)
 
-        customFieldDataRepository.save(CustomFieldData(usageKey, parentType, parentId, fieldData.fieldId,
-                mFieldData?.createdDate ?: now, now, fieldData.values?.let { listOf(it.toString()) }, fieldData.value?.toString()))
+        customFieldDataRepository.save(CustomFieldData(
+                usageKey, parentType, parentId, fieldData.fieldId, mFieldData?.createdDate ?: now, now,
+                if (fieldData.value is List<*>) fieldData.value.map { it.toString() } else null,
+                if (fieldData.value is List<*>) null else fieldData.value?.toString())
+        )
 
         return ResponseFieldData(field, fieldData.copy(createdDate = now, updatedDate = now))
     }

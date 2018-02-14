@@ -1,6 +1,7 @@
 package io.mysocialapp.customfield.models
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import io.mysocialapp.customfield.extensions.convertToTheRightType
 import java.util.*
 
 /**
@@ -9,10 +10,13 @@ import java.util.*
 data class FieldData(val fieldId: Long? = null,
                      @JsonProperty(access = JsonProperty.Access.READ_ONLY) val createdDate: Date? = null,
                      @JsonProperty(access = JsonProperty.Access.READ_ONLY) val updatedDate: Date? = null,
-                     val value: Any? = null,
-                     val values: List<Any>? = null) {
+                     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) val value: Any? = null) {
 
     val fieldIdStr: String?
         get() = fieldId?.toString()
+
+    val valueOut: Any?
+        @JsonProperty("value", access = JsonProperty.Access.READ_ONLY)
+        get() = (value as? List<*>)?.map { it?.toString()?.convertToTheRightType() } ?: value?.toString()?.convertToTheRightType()
 
 }
