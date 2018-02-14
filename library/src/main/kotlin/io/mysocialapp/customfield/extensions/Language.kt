@@ -14,3 +14,8 @@ fun Map<Language, String>.toStringKeysValues(): Map<String, String> = this.asSeq
     acc[v.key.toString()] = v.value
     acc
 }
+
+fun Map<String, String>.toStringByLanguage(): Map<Language, String> = this.asSequence().fold(mutableMapOf()) { acc, v ->
+    acc[v.key.toLanguage()] = v.value
+    acc
+}

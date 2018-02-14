@@ -18,6 +18,7 @@ import java.util.*
 )
 interface Field {
 
+    var usageKey: String?
     var id: Long?
 
     val idStr: String?
@@ -27,7 +28,7 @@ interface Field {
     var accessControl: AccessControl?
     var createdDate: Date?
     var updatedDate: Date?
-    var names: Map<Language, String>?
+    var labels: Map<Language, String>?
     var descriptions: Map<Language, String>?
     var placeholders: Map<Language, String>?
 
