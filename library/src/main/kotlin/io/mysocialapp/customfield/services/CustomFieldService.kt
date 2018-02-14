@@ -2,6 +2,7 @@ package io.mysocialapp.customfield.services
 
 import io.mysocialapp.customfield.models.*
 import io.mysocialapp.customfield.repositories.CustomFieldRepository
+import io.mysocialapp.customfield.utils.UUID
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cassandra.core.cql.CqlIdentifier
 import org.springframework.data.cassandra.core.CassandraAdminTemplate
@@ -47,7 +48,15 @@ class CustomFieldService @Autowired constructor(private val cassandraAdminTempla
     }
 
     fun create(usageKey: String, field: Field): Field {
-        customFieldRepository.save(field.customField.copy(usageKey = usageKey))
+        field.also {
+            it.id = UUID.generateLongId()
+            it.createdDate = Date()
+            it.updatedDate = it.createdDate
+            it.enabled = true
+            it.usageKey = usageKey
+        }
+
+        customFieldRepository.save(field.customField)
         return field
     }
 

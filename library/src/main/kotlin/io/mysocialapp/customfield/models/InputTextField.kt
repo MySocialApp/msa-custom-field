@@ -1,6 +1,7 @@
 package io.mysocialapp.customfield.models
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonProperty
 import io.mysocialapp.customfield.extensions.toStringKeysValues
 import java.util.*
 
@@ -8,11 +9,11 @@ import java.util.*
  * Created by evoxmusic on 11/02/2018.
  */
 open class InputTextField(@JsonIgnore override var usageKey: String? = null,
-                          override var id: Long? = null,
+                          @JsonProperty(access = JsonProperty.Access.READ_ONLY) override var id: Long? = null,
                           override var enabled: Boolean? = null,
                           override var accessControl: AccessControl? = null,
-                          override var createdDate: Date? = null,
-                          override var updatedDate: Date? = null,
+                          @JsonProperty(access = JsonProperty.Access.READ_ONLY) override var createdDate: Date? = null,
+                          @JsonProperty(access = JsonProperty.Access.READ_ONLY) override var updatedDate: Date? = null,
                           override var labels: Map<Language, String>? = null,
                           override var descriptions: Map<Language, String>? = null,
                           override var placeholders: Map<Language, String>? = null) : Field {
