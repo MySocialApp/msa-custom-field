@@ -27,20 +27,22 @@ class InputLocationField(@JsonIgnore override var usageKey: String? = null,
         get() = FieldType.INPUT_LOCATION
 
     override fun validator(fieldData: FieldData) {
-        if (fieldData.value !is Map<*, *>) {
-            throw FieldFormatException("field value must be object with 'latitude' and 'longitude' decimal properties")
-        }
+        if (fieldData.value != null) {
+            if (fieldData.value !is Map<*, *>) {
+                throw FieldFormatException("field value must be object with 'latitude' and 'longitude' decimal properties")
+            }
 
-        try {
-            fieldData.value["latitude"]?.toString()?.toDouble()
-        } catch (e: NumberFormatException) {
-            throw FieldFormatException("property latitude must be decimal")
-        }
+            try {
+                fieldData.value["latitude"]?.toString()?.toDouble()
+            } catch (e: NumberFormatException) {
+                throw FieldFormatException("property latitude must be decimal")
+            }
 
-        try {
-            fieldData.value["longitude"]?.toString()?.toDouble()
-        } catch (e: NumberFormatException) {
-            throw FieldFormatException("property longitude must be decimal")
+            try {
+                fieldData.value["longitude"]?.toString()?.toDouble()
+            } catch (e: NumberFormatException) {
+                throw FieldFormatException("property longitude must be decimal")
+            }
         }
     }
 }
