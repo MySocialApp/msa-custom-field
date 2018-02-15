@@ -16,7 +16,7 @@ object FieldFactory {
         FieldType.INPUT_URL -> completeField(InputURLField(), customField)
         FieldType.RADIO -> TODO()
         FieldType.CHECKBOX -> TODO()
-        FieldType.LOCATION -> TODO()
+        FieldType.INPUT_LOCATION -> TODO()
         else -> null
     }
 

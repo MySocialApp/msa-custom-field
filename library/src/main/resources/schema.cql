@@ -26,5 +26,7 @@ created_date timestamp,
 updated_date timestamp,
 values list<text>,
 value text,
+latitude decimal,
+longitude decimal,
 PRIMARY KEY ((usage_key), parent_type, parent_id, custom_field_id)
 );

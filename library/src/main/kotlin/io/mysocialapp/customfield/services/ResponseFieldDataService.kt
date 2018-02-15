@@ -28,7 +28,8 @@ class ResponseFieldDataService @Autowired constructor(private val customFieldSer
         }
 
         return ResponseFieldData(field, customFieldDataService.get(cf.usageKey, parentType, parentId, cf.id)?.let {
-            FieldData(it.customFieldId, it.createdDate, it.updatedDate, it.value ?: it.values)
+            FieldData(it.customFieldId, it.createdDate, it.updatedDate,
+                    it.value ?: it.values ?: mapOf("latitude" to it.latitude, "longitude" to it.longitude))
         })
     }
 

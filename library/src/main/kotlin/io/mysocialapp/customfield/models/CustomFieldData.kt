@@ -26,4 +26,8 @@ data class CustomFieldData(
         @Column("values")
         val values: List<String>? = null,
         @Column("value")
-        val value: String? = null)
+        val value: String? = null,
+        @Column("latitude")
+        val latitude: Double? = null,
+        @Column("longitude")
+        val longitude: Double? = null)
