@@ -31,6 +31,12 @@ object FieldFactory {
             labels = customField.labels?.toStringByLanguage()
             descriptions = customField.descriptions?.toStringByLanguage()
             placeholders = customField.placeholders?.toStringByLanguage()
+            values = mapOf(
+                    Language.EN to (customField.valuesEnglish ?: emptyList()),
+                    Language.FR to (customField.valuesFrench ?: emptyList())
+            )
+            defaultValue = customField.defaultValue
+            position = customField.position
         }
     }
 
