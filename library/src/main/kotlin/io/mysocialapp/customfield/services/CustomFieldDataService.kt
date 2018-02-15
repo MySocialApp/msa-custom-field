@@ -58,7 +58,7 @@ class CustomFieldDataService @Autowired constructor(private val cassandraAdminTe
         val now = Date()
         val mFieldData = get(usageKey, parentType, parentId, fieldData.fieldId)
 
-        val (value, values, latitude, longitude) = if (fieldData.value is List<*>) {
+        val (values, value, latitude, longitude) = if (fieldData.value is List<*>) {
             arrayOf(fieldData.value.map { it.toString() }, null, null, null)
         } else if (fieldData.value is Map<*, *> && fieldData.value["latitude"] != null && fieldData.value["longitude"] != null) {
             arrayOf(null, null, fieldData.value["latitude"], fieldData.value["longitude"])
