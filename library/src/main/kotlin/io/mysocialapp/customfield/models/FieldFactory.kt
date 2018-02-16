@@ -14,7 +14,7 @@ object FieldFactory {
         FieldType.INPUT_BOOLEAN -> completeField(InputBooleanField(), customField)
         FieldType.INPUT_DATE -> completeField(InputDateField(), customField)
         FieldType.INPUT_URL -> completeField(InputURLField(), customField)
-        FieldType.INPUT_RADIO -> completeField(InputRadioField(), customField)
+        FieldType.INPUT_SELECT -> completeField(InputSelectField(), customField)
         FieldType.INPUT_CHECKBOX -> completeField(InputCheckboxField(), customField)
         FieldType.INPUT_LOCATION -> completeField(InputLocationField(), customField)
         else -> null

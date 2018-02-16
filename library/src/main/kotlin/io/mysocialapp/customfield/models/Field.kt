@@ -16,7 +16,7 @@ import java.util.*
         JsonSubTypes.Type(value = InputDateField::class, name = "INPUT_DATE"),
         JsonSubTypes.Type(value = InputURLField::class, name = "INPUT_URL"),
         JsonSubTypes.Type(value = InputLocationField::class, name = "INPUT_LOCATION"),
-        JsonSubTypes.Type(value = InputRadioField::class, name = "INPUT_RADIO"),
+        JsonSubTypes.Type(value = InputSelectField::class, name = "INPUT_SELECT"),
         JsonSubTypes.Type(value = InputCheckboxField::class, name = "INPUT_CHECKBOX")
 )
 interface Field {

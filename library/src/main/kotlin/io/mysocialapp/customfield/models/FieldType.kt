@@ -11,6 +11,6 @@ enum class FieldType {
     INPUT_DATE,
     INPUT_URL,
     INPUT_LOCATION,
-    INPUT_RADIO,
+    INPUT_SELECT,
     INPUT_CHECKBOX,
 }
