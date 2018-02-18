@@ -29,8 +29,6 @@ class InputCheckboxField(@JsonIgnore override var usageKey: String? = null,
     override fun validator(fieldData: FieldData) {
         if (fieldData.value !is List<*>) {
             throw FieldFormatException("field value must be type of List")
-        } else if (fieldData.value.isEmpty()) {
-            throw FieldFormatException("field value must have at least one element (is empty)")
         }
     }
 }
