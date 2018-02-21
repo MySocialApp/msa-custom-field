@@ -13,6 +13,10 @@ fun String?.convertToTheRightType(): Any? {
         return null
     }
 
+    if (this == "true" || this == "false") {
+        return this.toBoolean()
+    }
+
     if (this.contains(".")) {
         try {
             return this.toDouble()
