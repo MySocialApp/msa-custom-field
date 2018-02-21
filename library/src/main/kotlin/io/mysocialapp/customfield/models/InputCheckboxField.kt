@@ -27,7 +27,7 @@ class InputCheckboxField(@JsonIgnore override var usageKey: String? = null,
         get() = FieldType.INPUT_CHECKBOX
 
     override fun validator(fieldData: FieldData) {
-        if (fieldData.value !is List<*>) {
+        if (fieldData.value != null && fieldData.value !is List<*>) {
             throw FieldFormatException("field value must be type of List")
         }
     }
