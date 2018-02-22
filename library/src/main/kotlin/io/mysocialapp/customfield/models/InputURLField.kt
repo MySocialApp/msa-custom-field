@@ -28,10 +28,21 @@ class InputURLField(@JsonIgnore override var usageKey: String? = null,
         get() = FieldType.INPUT_URL
 
     override fun validator(fieldData: FieldData) {
-        try {
-            URI(fieldData.value?.toString())
-        } catch (e: Exception) {
-            throw FieldFormatException("field value must be valid URL format")
+        val originalValue = fieldData.value?.toString()?.toLowerCase()
+        val value = if (originalValue?.isBlank() == true) {
+            null
+        } else if (originalValue?.startsWith("http") == true || originalValue?.startsWith("https") == true) {
+            originalValue
+        } else {
+            "http://$originalValue"
+        }
+
+        if (value != null) {
+            try {
+                URI(value)
+            } catch (e: Exception) {
+                throw FieldFormatException("field value must be valid URL format")
+            }
         }
     }
 }
