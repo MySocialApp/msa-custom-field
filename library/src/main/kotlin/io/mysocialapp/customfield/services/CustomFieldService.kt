@@ -69,6 +69,7 @@ class CustomFieldService @Autowired constructor(private val cassandraAdminTempla
             field.labels?.takeIf { it.isNotEmpty() }?.let { mField.labels = it }
             field.descriptions?.takeIf { it.isNotEmpty() }?.let { mField.descriptions = it }
             field.placeholders?.takeIf { it.isNotEmpty() }?.let { mField.placeholders = it }
+            field.accessControl?.let { accessControl = it }
         }
 
         customFieldRepository.save(mField.customField)
