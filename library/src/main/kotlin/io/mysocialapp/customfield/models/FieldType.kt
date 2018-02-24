@@ -10,6 +10,8 @@ enum class FieldType {
     INPUT_BOOLEAN,
     INPUT_DATE,
     INPUT_URL,
+    INPUT_EMAIL,
+    INPUT_PHONE,
     INPUT_LOCATION,
     INPUT_SELECT,
     INPUT_CHECKBOX,

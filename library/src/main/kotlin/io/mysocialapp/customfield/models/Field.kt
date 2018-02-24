@@ -15,6 +15,8 @@ import java.util.*
         JsonSubTypes.Type(value = InputBooleanField::class, name = "INPUT_BOOLEAN"),
         JsonSubTypes.Type(value = InputDateField::class, name = "INPUT_DATE"),
         JsonSubTypes.Type(value = InputURLField::class, name = "INPUT_URL"),
+        JsonSubTypes.Type(value = InputEmailField::class, name = "INPUT_EMAIL"),
+        JsonSubTypes.Type(value = InputPhoneField::class, name = "INPUT_PHONE"),
         JsonSubTypes.Type(value = InputLocationField::class, name = "INPUT_LOCATION"),
         JsonSubTypes.Type(value = InputSelectField::class, name = "INPUT_SELECT"),
         JsonSubTypes.Type(value = InputCheckboxField::class, name = "INPUT_CHECKBOX")
