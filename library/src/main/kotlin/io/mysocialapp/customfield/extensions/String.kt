@@ -17,6 +17,10 @@ fun String?.convertToTheRightType(): Any? {
         return this.toBoolean()
     }
 
+    if (this.startsWith("tel|")) {
+        return this.split("tel|")[1]
+    }
+
     if (this.contains(".")) {
         try {
             return this.toDouble()

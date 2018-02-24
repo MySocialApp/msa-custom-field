@@ -62,6 +62,8 @@ class CustomFieldDataService @Autowired constructor(private val cassandraAdminTe
             arrayOf(fieldData.value.map { it.toString() }, null, null, null)
         } else if (fieldData.value is Map<*, *> && fieldData.value["latitude"] != null && fieldData.value["longitude"] != null) {
             arrayOf(null, null, fieldData.value["latitude"], fieldData.value["longitude"])
+        } else if (field is InputPhoneField) {
+            arrayOf(null, "tel|${fieldData.value.toString()}", null, null)
         } else {
             arrayOf(null, fieldData.value.toString(), null, null)
         }
