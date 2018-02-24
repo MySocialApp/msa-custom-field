@@ -28,8 +28,8 @@ class InputEmailField(@JsonIgnore override var usageKey: String? = null,
         get() = FieldType.INPUT_EMAIL
 
     override fun validator(fieldData: FieldData) {
-        val value = fieldData.value?.toString()?.toLowerCase() ?: return
-        if (!EmailValidator.getInstance().isValid(value)) {
+        val email = fieldData.value?.toString()?.toLowerCase()
+        if (email?.isNotBlank() == true && !EmailValidator.getInstance().isValid(email)) {
             throw FieldFormatException("field value must be valid Email format")
         }
     }
