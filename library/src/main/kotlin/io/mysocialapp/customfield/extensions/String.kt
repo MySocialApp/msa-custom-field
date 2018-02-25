@@ -17,6 +17,14 @@ fun String?.convertToTheRightType(): Any? {
         return this.toBoolean()
     }
 
+    if (this.startsWith("float|")) {
+        return this.split("float|")[1].toFloat()
+    }
+
+    if (this.startsWith("long|")) {
+        return this.split("long|")[1].toLong()
+    }
+
     if (this.startsWith("tel|")) {
         return this.split("tel|")[1]
     }

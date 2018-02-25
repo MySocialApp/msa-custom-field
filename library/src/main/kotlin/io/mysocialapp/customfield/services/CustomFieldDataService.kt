@@ -64,6 +64,10 @@ class CustomFieldDataService @Autowired constructor(private val cassandraAdminTe
             arrayOf(null, null, fieldData.value["latitude"], fieldData.value["longitude"])
         } else if (field is InputPhoneField) {
             arrayOf(null, "tel|${fieldData.value.toString()}", null, null)
+        } else if (field is InputNumberField && fieldData.value is Float) {
+            arrayOf(null, "float|${fieldData.value}", null, null)
+        } else if (field is InputNumberField && fieldData.value is Long) {
+            arrayOf(null, "long|${fieldData.value}", null, null)
         } else {
             arrayOf(null, fieldData.value.toString(), null, null)
         }
