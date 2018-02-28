@@ -27,14 +27,16 @@ class CustomFieldService @Autowired constructor(private val cassandraAdminTempla
         cassandraAdminTemplate.createTable(true, CqlIdentifier(TABLE), CustomField::class.java, emptyMap())
     }
 
-    fun list(): Iterable<Field> = customFieldRepository.findAll().mapNotNull { FieldFactory.from(it) }.sortedBy { it.position }
+    fun list(): Iterable<Field> = customFieldRepository.findAll().mapNotNull { FieldFactory.from(it) }
+            .filter { it.enabled != false }.sortedBy { it.position }
 
     fun list(usageKey: String): Iterable<Field> {
         if (usageKey.isBlank()) {
             return emptyList()
         }
 
-        return customFieldRepository.findByUsageKey(usageKey).mapNotNull { FieldFactory.from(it) }.sortedBy { it.position }
+        return customFieldRepository.findByUsageKey(usageKey).mapNotNull { FieldFactory.from(it) }
+                .filter { it.enabled != false }.sortedBy { it.position }
     }
 
     fun get(usageKey: String, id: Long): Field? {
