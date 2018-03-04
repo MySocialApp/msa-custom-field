@@ -9,7 +9,7 @@ import java.util.*
 fun String?.toDate(): Date? = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(this)
 
 fun String?.convertToTheRightType(): Any? {
-    if (this == null) {
+    if (this == null || this.isBlank() || this.toLowerCase() == "null") {
         return null
     }
 
