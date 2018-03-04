@@ -19,7 +19,7 @@ data class FieldData(val fieldId: Long? = null,
         @JsonProperty("value", access = JsonProperty.Access.READ_ONLY)
         get() = if (value is List<*>) {
             value.map { it.toString().convertToTheRightType() }
-        } else if (value is Map<*, *> && value["latitude"] != null && value["longitude"] != null) {
+        } else if (value is Map<*, *>) {
             value
         } else {
             value?.toString()?.convertToTheRightType()
