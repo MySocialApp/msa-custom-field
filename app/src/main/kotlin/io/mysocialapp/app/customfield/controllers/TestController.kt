@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 @Component
 @RestController
 @RequestMapping("/test")
-class TestController : MyController() {
+class TestController : TestMyController() {
 
     @Autowired
     val customFieldDataService: CustomFieldDataService? = null
