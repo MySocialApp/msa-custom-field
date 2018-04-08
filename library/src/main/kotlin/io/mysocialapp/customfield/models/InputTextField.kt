@@ -33,7 +33,7 @@ open class InputTextField(@JsonIgnore override var usageKey: String? = null,
     }
 
     override fun validator(fieldData: FieldData) {
-        if (fieldData.value == null) {
+        if (fieldData.value == null || fieldData.value.toString().isBlank()) {
             return
         }
 

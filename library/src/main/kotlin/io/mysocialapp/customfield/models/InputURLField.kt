@@ -28,7 +28,7 @@ class InputURLField(@JsonIgnore override var usageKey: String? = null,
         get() = FieldType.INPUT_URL
 
     override fun validator(fieldData: FieldData) {
-        if (fieldData.value == null) {
+        if (fieldData.value == null || fieldData.value.toString().isBlank()) {
             return
         }
 
