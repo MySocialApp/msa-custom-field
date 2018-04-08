@@ -29,8 +29,12 @@ class InputDateField(@JsonIgnore override var usageKey: String? = null,
         get() = FieldType.INPUT_DATE
 
     override fun validator(fieldData: FieldData) {
+        if (fieldData.value == null) {
+            return
+        }
+
         try {
-            fieldData.value?.toString()?.toDate()
+            fieldData.value.toString().toDate()
         } catch (e: ParseException) {
             throw FieldFormatException("field value must be ISO8601 date format")
         }

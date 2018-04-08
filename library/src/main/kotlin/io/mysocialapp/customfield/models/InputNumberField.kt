@@ -27,8 +27,12 @@ class InputNumberField(@JsonIgnore override var usageKey: String? = null,
         get() = FieldType.INPUT_NUMBER
 
     override fun validator(fieldData: FieldData) {
+        if (fieldData.value == null) {
+            return
+        }
+
         try {
-            fieldData.value?.toString()?.toDouble()
+            fieldData.value.toString().toDouble()
         } catch (e: NumberFormatException) {
             throw FieldFormatException("field value must be numeric")
         }

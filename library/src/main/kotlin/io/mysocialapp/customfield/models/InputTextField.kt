@@ -33,6 +33,10 @@ open class InputTextField(@JsonIgnore override var usageKey: String? = null,
     }
 
     override fun validator(fieldData: FieldData) {
+        if (fieldData.value == null) {
+            return
+        }
+
         if (fieldData.value !is String) {
             throw FieldFormatException("field value must be string")
         }
