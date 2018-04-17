@@ -56,6 +56,7 @@ class CustomFieldService @Autowired constructor(private val cassandraAdminTempla
             it.updatedDate = it.createdDate
             it.enabled = true
             it.usageKey = usageKey
+            it.accessControl = field.accessControl ?: AccessControl.PUBLIC
         }
 
         customFieldRepository.save(field.customField)
