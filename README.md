@@ -17,7 +17,7 @@ repositories {
 Step 2. Add the dependency
 ```
 dependencies {
-  compile 'com.github.mysocialapp:msa-custom-field:library:{version}'
+  compile 'com.github.mysocialapp.msa-custom-field:library:{version}'
 }
 ```
 
