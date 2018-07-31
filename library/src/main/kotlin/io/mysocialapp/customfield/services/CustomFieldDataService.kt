@@ -48,13 +48,16 @@ class CustomFieldDataService @Autowired constructor(private val cassandraAdminTe
     }
 
     fun create(usageKey: String, parentType: String, parentId: Long, responseFieldData: ResponseFieldData): ResponseFieldData {
-        if (responseFieldData.data == null || responseFieldData.field?.id == null) {
-            throw MissingMandatoryFieldException("Field 'data' is null. It is mandatory")
+        if (responseFieldData.data == null) {
+            throw MissingMandatoryFieldException("Object 'data' is null. It is mandatory")
         }
 
+        if (responseFieldData.data.fieldId == null && responseFieldData.field?.id == null) {
+            throw MissingMandatoryFieldException("Property 'field.id' and 'data.id' are null. It is mandatory")
+        }
 
         val fieldData = if (responseFieldData.data.fieldId == null) {
-            responseFieldData.data.copy(fieldId = responseFieldData.field.id)
+            responseFieldData.data.copy(fieldId = responseFieldData.field?.id)
         } else {
             responseFieldData.data
         }
