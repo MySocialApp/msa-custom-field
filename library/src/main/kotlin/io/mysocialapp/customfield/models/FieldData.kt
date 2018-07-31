@@ -17,12 +17,10 @@ data class FieldData(val fieldId: Long? = null,
 
     val valueOut: Any?
         @JsonProperty("value", access = JsonProperty.Access.READ_ONLY)
-        get() = if (value is List<*>) {
-            value.map { it.toString().convertToTheRightType() }
-        } else if (value is Map<*, *>) {
-            value
-        } else {
-            value?.toString()?.convertToTheRightType()
+        get() = when (value) {
+            is List<*> -> value.map { it.toString().convertToTheRightType() }
+            is Map<*, *> -> value
+            else -> value?.toString()?.convertToTheRightType()
         }
 
 }

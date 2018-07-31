@@ -40,8 +40,26 @@ class CustomFieldDataService @Autowired constructor(private val cassandraAdminTe
         return customFieldDataRepository.findByUsageKeyAndParentTypeAndParentIdAndCustomFieldId(usageKey, parentType, parentId, fieldId)
     }
 
+    fun create(usageKey: String, parentType: String, parentId: Long, vararg responseFieldData: ResponseFieldData): List<ResponseFieldData> =
+            responseFieldData.map { create(usageKey, parentType, parentId, it) }
+
     fun create(usageKey: String, parentType: String, parentId: Long, vararg fieldData: FieldData): List<ResponseFieldData> = fieldData.map {
         create(usageKey, parentType, parentId, it)
+    }
+
+    fun create(usageKey: String, parentType: String, parentId: Long, responseFieldData: ResponseFieldData): ResponseFieldData {
+        if (responseFieldData.data == null || responseFieldData.field?.id == null) {
+            throw MissingMandatoryFieldException("Field 'data' is null. It is mandatory")
+        }
+
+
+        val fieldData = if (responseFieldData.data.fieldId == null) {
+            responseFieldData.data.copy(fieldId = responseFieldData.field.id)
+        } else {
+            responseFieldData.data
+        }
+
+        return create(usageKey, parentType, parentId, fieldData)
     }
 
     fun create(usageKey: String, parentType: String, parentId: Long, fieldData: FieldData): ResponseFieldData {
