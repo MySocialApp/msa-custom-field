@@ -53,7 +53,7 @@ class CustomFieldDataService @Autowired constructor(private val cassandraAdminTe
         }
 
         if (responseFieldData.data.fieldId == null && responseFieldData.field?.id == null) {
-            throw MissingMandatoryFieldException("Property 'field.id' and 'data.id' are null. It is mandatory")
+            throw MissingMandatoryFieldException("Property 'field.id' and 'data.id' are null. They are mandatory")
         }
 
         val fieldData = if (responseFieldData.data.fieldId == null) {
